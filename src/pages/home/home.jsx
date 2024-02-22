@@ -49,7 +49,12 @@ export const Home = () => {
         </h2>
         <div className="carousel flex gap-1 max-w-[1300px] mx-auto">
           {dataRuknlar.map((item) => (
-            <RuknlarComp img={item.img} title={item.title} id={item.id} />
+            <RuknlarComp
+              key={item.id}
+              img={item.img}
+              title={item.title}
+              id={item.id}
+            />
           ))}
         </div>
         <div className="flex justify-center w-full py-2 gap-2">
