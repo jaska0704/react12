@@ -2,7 +2,7 @@ import React from "react";
 import img from "../../../../assets/header-img/user.svg";
 import { requist } from "../../../../data/config/request";
 import { saveState } from "../../../../data/lib/storage";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export const Button = () => {
   const [regstate1, setRegstate1] = React.useState(false);
@@ -10,7 +10,9 @@ export const Button = () => {
   const [email, SetEmail] = React.useState("");
   const [password, SetPassword] = React.useState("");
   const [firstname, SetFirstname] = React.useState("");
+  const [foto, SetFoto] = React.useState("");
   // const [phone, SetPhone] = React.useState("");
+  const navigate = useNavigate();
   const submit = (e) => {
     e.preventDefault();
     requist
@@ -18,10 +20,12 @@ export const Button = () => {
         email,
         password,
         firstname,
+        foto,
       })
       .then((res) => {
         saveState("user", res.data);
         console.log(res);
+        navigate("/home", setRegstate(false));
       });
   };
   const onsubmit = (e) => {
@@ -34,6 +38,7 @@ export const Button = () => {
       .then((res) => {
         saveState("user", res.data);
         console.log(res);
+        navigate("/home" , setRegstate1(false))
       });
   };
 
@@ -79,6 +84,17 @@ export const Button = () => {
               </label>
               <label className="form-control w-full max-w-xs">
                 <div className="label">
+                  <span className="label-text">Профил расмни киритинг</span>
+                </div>
+                <input
+                  type="text"
+                  placeholder="Исм/Фамилиянгиз"
+                  className="input input-bordered w-full max-w-xs"
+                  onChange={(e) => SetFoto(e.target.value)}
+                />
+              </label>
+              <label className="form-control w-full max-w-xs">
+                <div className="label">
                   <span className="label-text">Паролни киритинг</span>
                 </div>
                 <input
@@ -93,9 +109,9 @@ export const Button = () => {
                   <button className="btn">Руйхатдан утинг</button>
                   <Link>
                     <h3
-                      onClick={() =>{ 
-                        setRegstate1(true)
-                        setRegstate(false)
+                      onClick={() => {
+                        setRegstate1(true);
+                        setRegstate(false);
                       }}
                       className="text-blue-600"
                     >
